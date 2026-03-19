@@ -62,3 +62,20 @@ sliced_list = letters[1:6]
 print(sliced_list)
 # Would output: ["b", "c", "d", "e", "f"]
 ```
+
+## Combining Lists: Zip Function 
+- The `zip` function allows us to quickly combine associated data sets without needing to rely on multi-dimensional lists
+```python 
+names = ["Jenny", "Alexus", "Sam", "Grace"]
+heights = [61, 70, 67, 64]
+names_and_heights = zip(names, heights)
+# Would output: <zip object at 0x7f1631e86b48>
+
+converted_list = list(names_and_heights)
+print(converted_list)
+# Outputs: [('Jenny', 61), ('Alexus', 70), ('Sam', 67), ('Grace', 64)]
+```
+
+- Notice the inner lists don't use square brackes around the values. This is because they have been converted into tuples
+
+
