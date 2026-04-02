@@ -44,6 +44,8 @@ class Rectangle(Shape):
     def perimeter(self):
         p2 = 2 * (self.height + self.width)
         return p2
+    def describe(self):
+        print(f'Rectangle color: {self.color}')
     
     @classmethod 
     def square(cls, side, color):
@@ -67,6 +69,8 @@ class Triangle(Shape):
     def perimeter(self):
         p3 = self.a + self.b + self.c
         return p3
+    def describe(self):
+        print(f'Triangle color: {self.color}')
 
     
     
