@@ -28,10 +28,10 @@ class Employee:
         cls.company = company_name
     @staticmethod
     def money_format(money):
-        if not isinstance(money(int,float)):
+        if not isinstance(money, (int,float)):
             raise ValueError ("Needs to be int")
         m = (f"${money:,.2f}")
-        print(m)
+        return m
     
 '''
 #To call a variable from another class or another: Employee.money_format(self.weekly_check())
@@ -56,12 +56,13 @@ class Hourly(Employee):
         self.hours = hours
     def bi_weekly_pay(self):
         if self.hours > 40:
-            pay_check = (self.pay * 1.5) * 2
+            ot = self.hours - 40
+            pay_check = (self.pay * (self.hours - ot)) * 2 + (self.pay * ot * 1.5)
         else:
-            pay_check = self.pay * 2
+            pay_check = (self.pay * self.hours) * 2
         return pay_check
     def __str__(self):
-        return f'Name {self.name}, ID {self.id}, Money {Employee.money_format(self.weekly_check())}' 
+        return f'Name {self.name}, ID {self.id}, Money {Employee.money_format(self.bi_weekly_pay())}' 
     
 
     
