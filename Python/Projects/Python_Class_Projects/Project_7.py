@@ -71,9 +71,12 @@ class Inventory:
         if product.is_valid(product.sku) == True:
             self.products.append(product)
     #fix this
-    def low_stock(self, product):
-        if product.stock < 20:
-            return "Low stock"
+    def low_stock(self, threshold):
+        results = []
+        for p in self.products:
+            if p.stock < threshold:
+                results.append(p)
+        return results
 
 
     @classmethod
@@ -89,7 +92,7 @@ class Inventory:
             new_list.add_stock(added)
         return new_list
     
-    @property
+    
     def all_inventory_total(self):
         total_price = 0
         for x in self.products:
@@ -112,3 +115,15 @@ total anyway.
 Every iteration creates a brand new all_total_inventory and assigns it. 
 It never accumulates — it just replaces whatever was there before.
 '''
+
+p1 = Product("Widget", "WIDGET01", 9.99, 50)
+p2 = Product("Gadget", "GADGET01", 14.99, 5)
+p3 = Product("Doohickey", "DOOHCK01", 4.99, 10)
+
+inventory = Inventory()
+inventory.add_stock(p1)
+inventory.add_stock(p2)
+inventory.add_stock(p3)
+
+print(inventory.total_inventory_value())   # 699.9
+print(inventory.low_stock_alert(20))       # [p2, p3] — both below threshold of 20
