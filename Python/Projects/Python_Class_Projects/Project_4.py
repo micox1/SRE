@@ -82,13 +82,16 @@ class Library:
             if book.title == title:
                 book.available= True 
     @classmethod
+    #book_data is any list that will be externally input into the method when running Library.from_list()
     def from_list(cls, book_data):
         new_data = cls()
         for books in book_data:
             title = books["title"]
             author = books["author"]
             year = books["year"]
+            #Adding to Book Class
             b = Book(title,author,year)
+            #Adding to Library
             new_data.add_book(b)
         return new_data
 
