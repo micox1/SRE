@@ -23,17 +23,8 @@ import random as random
 
 class Card:
     def __init__(self, suit, rank,):
-        #Why "not in" and not != ?
-        '''
-        != is checking if the suit "heart" does not equal the entire list. This will always be True so it doesnt work. 
-        It is not checking if it is not in the list but if it is the list itself. 
-        "not in" is checking membership within the list
-        '''
-        for items in rank:
-            if type(items) == str:
-                items.lower()
         self.suit = suit.lower()
-        self.rank = rank
+        self.rank = rank.lower() if type(rank) == str else rank
     
     
 
@@ -70,27 +61,16 @@ class Card:
 class Deck:
     def __init__(self):
         self.empty_deck = []
-
-    @staticmethod
-    def deck_valid(self):
-        if len(self.empty_deck) != 52:
-            raise ValueError ("Deck can only have 52 cards") 
-        
-    def add_rank(self, d_rank):
-        if d_rank.rank_valid(d_rank.ranks) == True:
-            self.empty_deck.append(d_rank)
-    def add_suit(self, d_suit):
-        if d_suit.rank_valid(d_suit.suits) == True:
-            self.empty_deck.append(d_suit)
-    
-    def create_deck(self):
         suits = ["heart", "diamond", "club", "spade"]
         ranks = [2,3,4,5,6,7,8,9,"jack","queen","king","ace"]
         for suit in suits:
             for rank in ranks:
                 self.empty_deck.append(Card(suit, rank))
 
-    
+    @staticmethod
+    def deck_valid(deck):
+        if len(deck.empty_deck) != 52:
+            raise ValueError ("Deck can only have 52 cards") 
    # Have to use random here      
     def shuffle_deck(self):
         random.shuffle(self.empty_deck)
@@ -103,4 +83,4 @@ class Deck:
         
     def resetting_deck(self):
         self.empty_deck = []
-        self.create_deck()
+        self.__init__()
